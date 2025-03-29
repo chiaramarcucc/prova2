@@ -55,7 +55,36 @@
             { name: "Alessandro Nicolì", time: 784 },
             { name: "Davide Pierrat", time: 785 },
             { name: "Alessandro Zangolini", time: 787 },
-            { name: "Giovanni Centili", time: 792 }
+            { name: "Giovanni Centili", time: 792 },
+            { name: "Massimiliano Iovane", time: 794 },
+            { name: "Manfredi Italiano", time: 795 },
+            { name: "Mattia Furlan", time: 795 },
+            { name: "Sofia Saletnich", time: 799 },
+            { name: "Leonardo Corbelli", time: 801 },
+            { name: "Sebastiano Tronto", time: 803 },
+            { name: "Alessandro Calzoni", time: 805 },
+            { name: "Alessandro Ricci", time: 805 },
+            { name: "Giovanni Contardi", time: 806 },
+            { name: "Luca Cerrato", time: 806 },
+            { name: "Paolo Marino", time: 814 },
+            { name: "Fabio Rossi", time: 815 },
+            { name: "Vittorio Ribechini", time: 820 },
+            { name: "Luca Brasini", time: 825 },
+            { name: "Christian Crea", time: 827 },
+            { name: "Pietro Furbatto", time: 827 },
+            { name: "Fabian Tomasović", time: 835 },
+            { name: "Nicola Barbaro", time: 840 },
+            { name: "Paolo Moriello", time: 842 },
+            { name: "Gabriele Fabellini", time: 844 },
+            { name: "Yassine Mesraoui", time: 857 },
+            { name: "Andrea Marconato", time: 860 },
+            { name: "Enrico Tenuti", time: 863 },
+            { name: "Alessandro Fava", time: 864 },
+            { name: "Simone Cantarelli", time: 870 },
+            { name: "Tommaso Raposio", time: 873 },
+            { name: "Carolina Sozio", time: 874 },
+            { name: "Dario Angelo Narbone", time: 878 },
+            { name: "Leonardo Carosio", time: 882 }
         ];
 
         function startGame() {
@@ -107,28 +136,36 @@
         }
 
         function checkAnswer(clickedIndex) {
-            let correctIndex = players[0].time < players[1].time ? 0 : 1;
+            let correctIndex = players[0].time <= players[1].time ? 0 : 1;
             let buttons = [document.getElementById("player1"), document.getElementById("player2")];
 
             if (clickedIndex - 1 === correctIndex) {
                 score++;
-                timeLeft += 2; // Aggiungi 2 secondi
-                document.getElementById("feedback").textContent = "✔ Corretto! +2s 🎉";
+                timeLeft += 3; // Aggiungi 3 secondi
+                document.getElementById("feedback").textContent = "✔ Corretto! 🎉";
                 buttons[correctIndex].classList.add("correct");
             } else {
-                timeLeft -= 2; // Sottrai 2 secondi
-                document.getElementById("feedback").textContent = "✖ Sbagliato! -2s ❌";
+                timeLeft -= 1; // Sottrai 1 secondi
+                document.getElementById("feedback").textContent = "✖ Sbagliato! ❌";
                 buttons[clickedIndex - 1].classList.add("wrong");
             }
 
             document.getElementById("score").textContent = score;
             updateTimerUI();
-            
-            setTimeout(() => {
-                buttons[0].classList.remove("correct", "wrong");
-                buttons[1].classList.remove("correct", "wrong");
-                nextRound();
-            }, 1000);
+
+    document.getElementById("score").textContent = score;
+    updateTimerUI();
+
+    // Dopo 1 secondo, rimuove i colori e aggiorna i nomi, poi riattiva i pulsanti
+    setTimeout(() => {
+        buttons[0].classList.remove("correct", "wrong");
+        buttons[1].classList.remove("correct", "wrong");
+
+        // Riabilita i pulsanti solo dopo aver cambiato i nomi
+        nextRound();
+        buttons[0].disabled = false;
+        buttons[1].disabled = false;
+    }, 1000);
         }
 
         function endGame() {
