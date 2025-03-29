@@ -136,22 +136,23 @@
         }
 
         function checkAnswer(clickedIndex) {
-            let correctIndex = players[0].time <= players[1].time ? 0 : 1;
-            let buttons = [document.getElementById("player1"), document.getElementById("player2")];
+    let correctIndex = players[currentLevel][0].time <= players[currentLevel][1].time ? 0 : 1;
+    let buttons = [document.getElementById("player1"), document.getElementById("player2")];
 
-            if (clickedIndex - 1 === correctIndex) {
-                score++;
-                timeLeft += 3; // Aggiungi 3 secondi
-                document.getElementById("feedback").textContent = "✔ Corretto! 🎉";
-                buttons[correctIndex].classList.add("correct");
-            } else {
-                timeLeft -= 1; // Sottrai 1 secondi
-                document.getElementById("feedback").textContent = "✖ Sbagliato! ❌";
-                buttons[clickedIndex - 1].classList.add("wrong");
-            }
+    // Disabilita entrambi i pulsanti appena viene data una risposta
+    buttons[0].disabled = true;
+    buttons[1].disabled = true;
 
-            document.getElementById("score").textContent = score;
-            updateTimerUI();
+    if (clickedIndex - 1 === correctIndex) {
+        score++;
+        timeLeft += 3;
+        document.getElementById("feedback").textContent = "✔ Corretto! 🎉";
+        buttons[correctIndex].classList.add("correct");
+    } else {
+        timeLeft -= 1;
+        document.getElementById("feedback").textContent = "✖ Sbagliato! ❌";
+        buttons[clickedIndex - 1].classList.add("wrong");
+    }
 
     document.getElementById("score").textContent = score;
     updateTimerUI();
