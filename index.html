@@ -27,17 +27,24 @@
 </head>
 <body>
     <h1>Chi ha la miglior media nel 3x3?</h1>
-    <p id="timer">Tempo: 10s</p>
-    <div id="progress-bar-container">
-        <div id="progress-bar"></div>
+
+    <!-- Timer e barra del tempo -->
+    <div id="timer-container">
+        <p id="timer">Tempo: 10s</p>
+        <div id="progress-bar-container">
+            <div id="progress-bar"></div>
+        </div>
     </div>
+
+    <!-- Gioco -->
     <div id="game-container">
         <button id="player1" onclick="checkAnswer(1)">Giocatore 1</button>
         <button id="player2" onclick="checkAnswer(2)">Giocatore 2</button>
     </div>
+
     <p id="feedback"></p>
     <p>Punteggio: <span id="score">0</span></p>
-    <button onclick="startGame()">Rigioca</button>
+    <button onclick="restartGame()">Rigioca</button>
 
     <script>
         let score = 0;
@@ -131,7 +138,7 @@
         }
 
         function checkAnswer(clickedIndex) {
-    let correctIndex = players[currentLevel][0].time <= players[currentLevel][1].time ? 0 : 1;
+    let correctIndex = players[0].time <= players[1].time ? 0 : 1;
     let buttons = [document.getElementById("player1"), document.getElementById("player2")];
 
     // Disabilita entrambi i pulsanti appena viene data una risposta
